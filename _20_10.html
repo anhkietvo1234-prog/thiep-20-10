@@ -1,1 +1,201 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gửi Các Chị 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Dancing+Script:wght@600&family=Be+Vietnam+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;overflow-x:hidden;
+  background:radial-gradient(circle at top,#6b2057,#210b2b 75%);
+  color:#fff1f6;font-family:'Be Vietnam Pro',sans-serif;
+}
+.glow{position:fixed;width:45vmax;height:45vmax;border-radius:50%;filter:blur(90px);opacity:.3;pointer-events:none}
+.g1{background:#ff2d8a;top:-20vmax;left:-15vmax}
+.g2{background:#8a3dff;bottom:-20vmax;right:-15vmax}
+#stage{
+  min-height:100svh;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;gap:18px;
+  text-align:center;padding:24px;transition:1s;
+}
+#stage.hide{opacity:0;transform:scale(.9);pointer-events:none;position:absolute}
+.line{font-family:'Playfair Display',serif;font-weight:900;line-height:1.25}
+.l1{font-size:clamp(1.8rem,8vw,4rem);color:white}
+.l2{font-size:clamp(2.3rem,10vw,5rem);color:#ff80b7;text-shadow:0 0 25px #ff3d84}
+#hint{font-family:'Dancing Script',cursive;font-size:1.5rem;color:#ffd9a8}
+button{
+  padding:14px 28px;border:0;border-radius:40px;
+  background:linear-gradient(135deg,#ff80b7,#ff287d);
+  color:white;font-size:1rem;font-weight:600;cursor:pointer;
+  box-shadow:0 0 25px #ff3d8466;
+}
+button:disabled{opacity:.7;cursor:default}
+#card{
+  display:none;min-height:100svh;padding:24px 14px;
+  justify-content:center;align-items:center;
+}
+#card.show{display:flex;animation:fade 1.2s}
+.box{
+  width:100%;max-width:440px;text-align:center;padding:26px 18px;
+  border:1px solid #ffb6d566;border-radius:26px;
+  background:linear-gradient(145deg,#ffffff20,#ffffff08);
+  backdrop-filter:blur(14px);
+  box-shadow:0 20px 70px #ff3d8433;
+  animation:pop .9s;
+}
+.badge{display:inline-block;background:linear-gradient(90deg,#ffd9a8,#ffb3d4);
+  color:#4a1240;border-radius:30px;padding:7px 12px;font-size:.7rem;font-weight:600}
+.big{font-size:2.8rem;animation:beat 1.2s infinite;margin:12px}
+.t1{font-family:'Dancing Script',cursive;color:#ffd9a8;font-size:1.5rem;margin:0}
+h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,8vw,2.5rem);
+  color:#ff9ec8;margin:5px 0 12px}
+.orn{color:#ff80b7;margin:12px}
+#msg{font-size:.9rem;line-height:1.9;font-weight:300;white-space:pre-wrap;overflow-wrap:anywhere;min-height:0}
+.wishes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}
+.w{padding:12px 7px;border:1px solid #ffb6d544;border-radius:15px;background:#ffffff0d;
+  opacity:0;transform:translateY(15px);transition:opacity .8s,transform .8s}
+.w.on{opacity:1;transform:none}
+.w i{font-style:normal;font-size:1.5rem}
+.w b{display:block;color:#ffc2dc;font-size:.85rem;margin:7px 0}
+.w span{font-size:.72rem;line-height:1.5}
+.quote,.sign{font-family:'Dancing Script',cursive;color:#ffd9a8;
+  font-size:1.25rem;line-height:1.6;opacity:0;transition:opacity 1s}
+.sign{color:#ff80b7;margin-top:12px}
+.on2{opacity:1}
+.heart{position:fixed;bottom:-40px;pointer-events:none;animation:up linear forwards;z-index:5}
+@keyframes up{to{transform:translate(var(--dx),-110vh) rotate(30deg);opacity:0}}
+@keyframes beat{50%{transform:scale(1.2)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes pop{from{transform:scale(.85) translateY(20px)}to{transform:scale(1) translateY(0)}}
+.star{position:fixed;color:white;pointer-events:none;animation:tw 2s infinite alternate}
+@keyframes tw{to{opacity:.2;transform:scale(.5)}}
+@media(max-width:360px){.box{padding:20px 12px}.wishes{gap:6px}#msg{font-size:.85rem}}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<div class="glow g1"></div><div class="glow g2"></div>
 
+<section id="stage">
+  <div class="line l1">CHÚC MỪNG</div>
+  <div class="line l2">NGÀY 20/10 💖</div>
+  <div id="hint">✦ Một món quà nhỏ dành tặng cho Các Chị ở Cơ sở 6 ✦</div>
+  <button id="btn">Mở lời chúc 💌</button>
+</section>
+
+<section id="card">
+  <div class="box">
+    <span class="badge">20 · 10 &nbsp; NGÀY PHỤ NỮ VIỆT NAM</span>
+    <div class="big">💖</div>
+    <p class="t1">Thân gửi</p>
+    <h1>Các Chị Thân Thương</h1>
+    <div class="orn">❀ ❤ ❀</div>
+    <div id="msg" aria-live="polite"></div>
+    <div class="wishes">
+      <div class="w"><i>🌸</i><b>Luôn xinh đẹp</b><span>Rạng rỡ, tự tin và đầy sức sống.</span></div>
+      <div class="w"><i>💖</i><b>Luôn hạnh phúc</b><span>Mỗi ngày đều ngập tràn niềm vui.</span></div>
+      <div class="w"><i>✨</i><b>Vạn sự bình an</b><span>Công việc thuận lợi, cuộc sống an vui.</span></div>
+      <div class="w"><i>🌹</i><b>Mãi được yêu thương</b><span>Luôn được trân trọng và nâng niu.</span></div>
+    </div>
+    <div class="quote" id="quote">
+      Chúc những điều dịu dàng và đẹp đẽ nhất luôn đến với những người phụ nữ tuyệt vời. 🌷
+    </div>
+    <div class="sign" id="sign">— Gửi Các Chị ở Cơ sở 6 ngàn lời yêu thương 💝 Anh bé ở Vũng Tàu —</div>
+    <p style="font-size:.75rem;color:#ffd9a8;margin-top:20px">
+      Chạm vào màn hình để thả thêm tim 💕
+    </p>
+    <button id="more">Thả tim 💗</button>
+  </div>
+</section>
+
+<script>
+const intro = "Nhân ngày Phụ nữ Việt Nam 20/10, em xin gửi đến Các Chị ở Cơ sở 6 những lời chúc tốt đẹp nhất. Chúc Các Chị luôn xinh đẹp, vui vẻ, rạng rỡ và ngập tràn hạnh phúc. Mong mọi điều may mắn, bình an sẽ đến, công việc luôn thuận lợi và cuộc sống lúc nào cũng đầy ắp tiếng cười. Cảm ơn Các Chị vì sự yêu thương, quan tâm và những điều tốt đẹp mà Các Chị mang đến. Chúc Các Chị có một ngày 20/10 thật ý nghĩa! 🌸💖";
+
+const $ = id => document.getElementById(id);
+let opened = false;
+let typingTimer = null;
+
+for(let i=0;i<45;i++){
+  const s=document.createElement("div");
+  s.className="star";
+  s.textContent=Math.random()>.5?"✦":"·";
+  s.style.left=Math.random()*100+"vw";
+  s.style.top=Math.random()*100+"vh";
+  s.style.fontSize=(8+Math.random()*13)+"px";
+  s.style.animationDelay=Math.random()*3+"s";
+  document.body.appendChild(s);
+}
+
+function heart(){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.textContent=["💖","💕","💗","🌸","🌹","✨"][Math.floor(Math.random()*6)];
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(18+Math.random()*25)+"px";
+  h.style.animationDuration=(4+Math.random()*4)+"s";
+  h.style.setProperty("--dx",(Math.random()*140-70)+"px");
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),8500);
+}
+function storm(){
+  for(let i=0;i<24;i++)setTimeout(heart,i*90);
+}
+
+function typeMessage(){
+  let i=0;
+  $("msg").textContent="";
+  function type(){
+    $("msg").textContent=intro.slice(0,i);
+    i++;
+    if(i<=intro.length){
+      // Tốc độ gõ: 65ms mỗi ký tự. Đổi thành 80 hoặc 100 nếu muốn chậm hơn.
+      typingTimer=setTimeout(type,65);
+    }else{
+      document.querySelectorAll(".w").forEach((w,k)=>{
+        setTimeout(()=>w.classList.add("on"),k*500);
+      });
+      setTimeout(()=>$("quote").classList.add("on2"),1200);
+      setTimeout(()=>$("sign").classList.add("on2"),2000);
+    }
+  }
+  type();
+}
+
+function openCard(){
+  if(opened)return;
+  opened=true;
+  $("btn").disabled=true;
+  $("stage").classList.add("hide");
+  setTimeout(()=>{
+    $("stage").style.display="none";
+    $("card").classList.add("show");
+    storm();
+    typeMessage();
+  },700);
+}
+
+$("btn").addEventListener("click",openCard);
+$("more").addEventListener("click",e=>{
+  e.stopPropagation();
+  storm();
+});
+document.addEventListener("click",e=>{
+  if(opened && !e.target.closest("button")){
+    for(let i=0;i<5;i++)setTimeout(heart,i*80);
+  }
+});
+document.addEventListener("keydown",e=>{
+  if(e.code==="Space"){
+    e.preventDefault();
+    if(!opened)openCard();
+    else storm();
+  }
+});
+setInterval(()=>{if(opened)heart()},650);
+</script>
+</body>
+</html>
